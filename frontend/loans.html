@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loans · LibraryOS</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">L</div><div><strong>LibraryOS</strong><span>Management Dashboard</span></div></div>
+    <nav><a href="/index.html">Dashboard</a><a href="/books.html">Books</a><a href="/members.html">Members</a><a class="active" href="/loans.html">Loans</a></nav>
+    <div class="sidebar-footer"><span class="status-dot"></span> MySQL connected</div>
+  </aside>
+  <main class="main-content">
+    <header class="topbar">
+      <div><p class="eyebrow">CIRCULATION</p><h1>Loans</h1></div>
+    </header>
+
+    <section class="panel form-panel">
+      <div class="panel-heading"><div><p class="eyebrow">CHECKOUT</p><h2>Issue a Book</h2></div></div>
+      <form id="issueForm" class="form-grid">
+        <label>Book<select id="bookSelect" name="book_id" required></select></label>
+        <label>Member<select id="memberSelect" name="member_id" required></select></label>
+        <label>Loan Period (days)<input name="days" type="number" min="1" max="60" value="14" required></label>
+        <div class="form-actions"><button class="button" type="submit">Issue Book</button></div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">CURRENTLY OUT</p><h2>Active Loans</h2></div>
+        <button class="button secondary" onclick="loadLoans()">Refresh</button>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Book</th><th>Member</th><th>Issued</th><th>Due</th><th>Status</th><th>Fine</th><th>Action</th></tr></thead>
+        <tbody id="loansTable"></tbody></table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading"><div><p class="eyebrow">ATTENTION</p><h2>Overdue Books</h2></div></div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Book</th><th>Member</th><th>Due</th><th>Days Late</th><th>Calculated Fine</th></tr></thead>
+        <tbody id="overdueTable"></tbody></table>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/js/loans.js"></script>
+</body>
+</html>
