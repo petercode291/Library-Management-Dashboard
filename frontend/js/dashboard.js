@@ -18,40 +18,55 @@ async function loadDashboard() {
       getJSON("/api/dashboard/summary"),
       getJSON("/api/loans/overdue"),
       getJSON("/api/dashboard/popular-books"),
-      getJSON("/api/dashboard/categories")
+      getJSON("/api/dashboard/categories"),
     ]);
 
     document.getElementById("titleCount").textContent = summary.title_count;
     document.getElementById("totalCopies").textContent = summary.total_copies;
-    document.getElementById("availableCopies").textContent = summary.available_copies;
-    document.getElementById("activeMembers").textContent = summary.active_members;
+    document.getElementById("availableCopies").textContent =
+      summary.available_copies;
+    document.getElementById("activeMembers").textContent =
+      summary.active_members;
     document.getElementById("activeLoans").textContent = summary.active_loans;
     document.getElementById("overdueLoans").textContent = summary.overdue_loans;
 
     document.getElementById("overdueTable").innerHTML = overdue.length
-      ? overdue.slice(0, 8).map(row => `
+      ? overdue
+          .slice(0, 8)
+          .map(
+            (row) => `
           <tr>
             <td><strong>${escapeHTML(row.book_title)}</strong></td>
             <td>${escapeHTML(row.member_name)}</td>
             <td>${formatDate(row.due_date)}</td>
             <td><span class="badge overdue">${row.days_overdue} days</span></td>
             <td class="danger-text">${money(row.calculated_fine)}</td>
-          </tr>`).join("")
+          </tr>`,
+          )
+          .join("")
       : `<tr><td colspan="5" class="empty">No overdue books 🎉</td></tr>`;
 
     document.getElementById("popularList").innerHTML = popular.length
-      ? popular.map((row, i) => `
+      ? popular
+          .map(
+            (row, i) => `
           <div class="rank-row">
             <span>${i + 1}. ${escapeHTML(row.title)}</span>
             <small>${row.times_borrowed} loans</small>
-          </div>`).join("")
+          </div>`,
+          )
+          .join("")
       : `<div class="empty">No loan history yet.</div>`;
 
-    document.getElementById("categoryGrid").innerHTML = categories.map(row => `
+    document.getElementById("categoryGrid").innerHTML = categories
+      .map(
+        (row) => `
       <div class="category-card">
         <strong>${row.title_count}</strong>
         <span>${escapeHTML(row.category)} · ${row.total_copies} copies</span>
-      </div>`).join("");
+      </div>`,
+      )
+      .join("");
   } catch (error) {
     console.error(error);
     document.getElementById("overdueTable").innerHTML =
@@ -60,9 +75,17 @@ async function loadDashboard() {
 }
 
 function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  }[c]));
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      })[c],
+  );
 }
 
 loadDashboard();

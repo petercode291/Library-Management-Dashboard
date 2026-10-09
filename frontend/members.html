@@ -1,47 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Members · LibraryOS</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-<div class="app-shell">
-  <aside class="sidebar">
-    <div class="brand"><div class="brand-icon">L</div><div><strong>LibraryOS</strong><span>Management Dashboard</span></div></div>
-    <nav><a href="/index.html">Dashboard</a><a href="/books.html">Books</a><a class="active" href="/members.html">Members</a><a href="/loans.html">Loans</a></nav>
-    <div class="sidebar-footer"><span class="status-dot"></span> MySQL connected</div>
-  </aside>
-  <main class="main-content">
-    <header class="topbar">
-      <div><p class="eyebrow">PEOPLE</p><h1>Members</h1></div>
-      <button class="button" onclick="toggleForm()">+ Add Member</button>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Members · LibraryOS</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">L</div>
+          <div><strong>LibraryOS</strong><span>Management Dashboard</span></div>
+        </div>
+        <nav>
+          <a href="/index.html">Dashboard</a><a href="/books.html">Books</a
+          ><a class="active" href="/members.html">Members</a
+          ><a href="/loans.html">Loans</a>
+        </nav>
+        <div class="sidebar-footer">
+          <span class="status-dot"></span> MySQL connected
+        </div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">PEOPLE</p>
+            <h1>Members</h1>
+          </div>
+          <button class="button" onclick="toggleForm()">+ Add Member</button>
+        </header>
 
-    <section id="memberForm" class="panel form-panel hidden">
-      <div class="panel-heading"><div><p class="eyebrow">NEW RECORD</p><h2>Add Member</h2></div></div>
-      <form id="addMemberForm" class="form-grid">
-        <label>Member Code<input name="member_code" required maxlength="20"></label>
-        <label>First Name<input name="first_name" required maxlength="50"></label>
-        <label>Last Name<input name="last_name" required maxlength="50"></label>
-        <label>Email<input name="email" type="email" required></label>
-        <label>Phone<input name="phone" maxlength="15"></label>
-        <label>Address<input name="address" maxlength="200"></label>
-        <label>Status<select name="status"><option>Active</option><option>Inactive</option></select></label>
-        <div class="form-actions"><button class="button" type="submit">Save Member</button><button class="button secondary" type="button" onclick="toggleForm()">Cancel</button></div>
-      </form>
-    </section>
+        <section id="memberForm" class="panel form-panel hidden">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">NEW RECORD</p>
+              <h2>Add Member</h2>
+            </div>
+          </div>
+          <form id="addMemberForm" class="form-grid">
+            <label
+              >Member Code<input name="member_code" required maxlength="20"
+            /></label>
+            <label
+              >First Name<input name="first_name" required maxlength="50"
+            /></label>
+            <label
+              >Last Name<input name="last_name" required maxlength="50"
+            /></label>
+            <label>Email<input name="email" type="email" required /></label>
+            <label>Phone<input name="phone" maxlength="15" /></label>
+            <label>Address<input name="address" maxlength="200" /></label>
+            <label
+              >Status<select name="status">
+                <option>Active</option>
+                <option>Inactive</option>
+              </select></label
+            >
+            <div class="form-actions">
+              <button class="button" type="submit">Save Member</button
+              ><button
+                class="button secondary"
+                type="button"
+                onclick="toggleForm()"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </section>
 
-    <section class="panel">
-      <div class="toolbar"><input id="memberSearch" class="search" placeholder="Search members…"><button class="button secondary" onclick="loadMembers()">Refresh</button></div>
-      <div class="table-wrap">
-        <table><thead><tr><th>Code</th><th>Name</th><th>Email</th><th>Phone</th><th>Joined</th><th>Status</th><th>Action</th></tr></thead>
-        <tbody id="membersTable"></tbody></table>
-      </div>
-    </section>
-  </main>
-</div>
-<script src="/js/members.js"></script>
-</body>
+        <section class="panel">
+          <div class="toolbar">
+            <input
+              id="memberSearch"
+              class="search"
+              placeholder="Search members…"
+            /><button class="button secondary" onclick="loadMembers()">
+              Refresh
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Joined</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="membersTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/js/members.js"></script>
+  </body>
 </html>

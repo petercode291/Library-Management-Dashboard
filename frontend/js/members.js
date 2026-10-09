@@ -1,7 +1,15 @@
 function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  }[c]));
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      })[c],
+  );
 }
 
 function formatDate(value) {
@@ -10,11 +18,15 @@ function formatDate(value) {
 
 async function loadMembers() {
   const search = document.getElementById("memberSearch").value;
-  const response = await fetch(`/api/members?search=${encodeURIComponent(search)}`);
+  const response = await fetch(
+    `/api/members?search=${encodeURIComponent(search)}`,
+  );
   const members = await response.json();
 
   document.getElementById("membersTable").innerHTML = members.length
-    ? members.map(member => `
+    ? members
+        .map(
+          (member) => `
       <tr>
         <td>${escapeHTML(member.member_code)}</td>
         <td><strong>${escapeHTML(member.first_name)} ${escapeHTML(member.last_name)}</strong></td>
@@ -28,7 +40,9 @@ async function loadMembers() {
             ${member.status === "Active" ? "Deactivate" : "Activate"}
           </button>
         </td>
-      </tr>`).join("")
+      </tr>`,
+        )
+        .join("")
     : `<tr><td colspan="7" class="empty">No members found.</td></tr>`;
 }
 
@@ -38,32 +52,34 @@ function toggleForm() {
 
 document.getElementById("memberSearch").addEventListener("input", loadMembers);
 
-document.getElementById("addMemberForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  const data = Object.fromEntries(new FormData(event.target));
+document
+  .getElementById("addMemberForm")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target));
 
-  const response = await fetch("/api/members", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(data)
+    const response = await fetch("/api/members", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      alert((await response.json()).detail || "Could not add member.");
+      return;
+    }
+
+    event.target.reset();
+    toggleForm();
+    loadMembers();
   });
-
-  if (!response.ok) {
-    alert((await response.json()).detail || "Could not add member.");
-    return;
-  }
-
-  event.target.reset();
-  toggleForm();
-  loadMembers();
-});
 
 async function toggleMember(id, status) {
   const nextStatus = status === "Active" ? "Inactive" : "Active";
   const response = await fetch(`/api/members/${id}`, {
     method: "PATCH",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({status: nextStatus})
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status: nextStatus }),
   });
 
   if (!response.ok) {

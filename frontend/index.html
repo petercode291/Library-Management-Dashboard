@@ -1,90 +1,116 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Library Dashboard</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-icon">L</div>
-        <div>
-          <strong>LibraryOS</strong>
-          <span>Management Dashboard</span>
-        </div>
-      </div>
-      <nav>
-        <a class="active" href="/index.html">Dashboard</a>
-        <a href="/books.html">Books</a>
-        <a href="/members.html">Members</a>
-        <a href="/loans.html">Loans</a>
-      </nav>
-      <div class="sidebar-footer">
-        <span class="status-dot"></span>
-        MySQL connected
-      </div>
-    </aside>
-
-    <main class="main-content">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">LIBRARY MANAGEMENT SYSTEM</p>
-          <h1>Dashboard</h1>
-        </div>
-        <a class="button secondary" href="/docs" target="_blank">API Docs</a>
-      </header>
-
-      <section id="stats" class="stats-grid">
-        <article class="stat-card"><span>Book Titles</span><strong id="titleCount">—</strong></article>
-        <article class="stat-card"><span>Total Copies</span><strong id="totalCopies">—</strong></article>
-        <article class="stat-card"><span>Available Copies</span><strong id="availableCopies">—</strong></article>
-        <article class="stat-card"><span>Active Members</span><strong id="activeMembers">—</strong></article>
-        <article class="stat-card"><span>Active Loans</span><strong id="activeLoans">—</strong></article>
-        <article class="stat-card danger"><span>Overdue Loans</span><strong id="overdueLoans">—</strong></article>
-      </section>
-
-      <section class="content-grid">
-        <article class="panel">
-          <div class="panel-heading">
-            <div>
-              <p class="eyebrow">ATTENTION NEEDED</p>
-              <h2>Overdue Books</h2>
-            </div>
-            <a class="text-link" href="/loans.html">View all</a>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Book</th><th>Member</th><th>Due</th><th>Late</th><th>Fine</th></tr></thead>
-              <tbody id="overdueTable"><tr><td colspan="5" class="empty">Loading…</td></tr></tbody>
-            </table>
-          </div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-heading">
-            <div>
-              <p class="eyebrow">POPULARITY</p>
-              <h2>Most Borrowed</h2>
-            </div>
-          </div>
-          <div id="popularList" class="rank-list"><div class="empty">Loading…</div></div>
-        </article>
-      </section>
-
-      <section class="panel">
-        <div class="panel-heading">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">L</div>
           <div>
-            <p class="eyebrow">CATALOGUE</p>
-            <h2>Books by Category</h2>
+            <strong>LibraryOS</strong>
+            <span>Management Dashboard</span>
           </div>
         </div>
-        <div id="categoryGrid" class="category-grid"></div>
-      </section>
-    </main>
-  </div>
-  <script src="/js/dashboard.js"></script>
-</body>
+        <nav>
+          <a class="active" href="/index.html">Dashboard</a>
+          <a href="/books.html">Books</a>
+          <a href="/members.html">Members</a>
+          <a href="/loans.html">Loans</a>
+        </nav>
+        <div class="sidebar-footer">
+          <span class="status-dot"></span>
+          MySQL connected
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">LIBRARY MANAGEMENT SYSTEM</p>
+            <h1>Dashboard</h1>
+          </div>
+          <a class="button secondary" href="/docs" target="_blank">API Docs</a>
+        </header>
+
+        <section id="stats" class="stats-grid">
+          <article class="stat-card">
+            <span>Book Titles</span><strong id="titleCount">—</strong>
+          </article>
+          <article class="stat-card">
+            <span>Total Copies</span><strong id="totalCopies">—</strong>
+          </article>
+          <article class="stat-card">
+            <span>Available Copies</span><strong id="availableCopies">—</strong>
+          </article>
+          <article class="stat-card">
+            <span>Active Members</span><strong id="activeMembers">—</strong>
+          </article>
+          <article class="stat-card">
+            <span>Active Loans</span><strong id="activeLoans">—</strong>
+          </article>
+          <article class="stat-card danger">
+            <span>Overdue Loans</span><strong id="overdueLoans">—</strong>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">ATTENTION NEEDED</p>
+                <h2>Overdue Books</h2>
+              </div>
+              <a class="text-link" href="/loans.html">View all</a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Book</th>
+                    <th>Member</th>
+                    <th>Due</th>
+                    <th>Late</th>
+                    <th>Fine</th>
+                  </tr>
+                </thead>
+                <tbody id="overdueTable">
+                  <tr>
+                    <td colspan="5" class="empty">Loading…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">POPULARITY</p>
+                <h2>Most Borrowed</h2>
+              </div>
+            </div>
+            <div id="popularList" class="rank-list">
+              <div class="empty">Loading…</div>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">CATALOGUE</p>
+              <h2>Books by Category</h2>
+            </div>
+          </div>
+          <div id="categoryGrid" class="category-grid"></div>
+        </section>
+      </main>
+    </div>
+    <script src="/js/dashboard.js"></script>
+  </body>
 </html>
